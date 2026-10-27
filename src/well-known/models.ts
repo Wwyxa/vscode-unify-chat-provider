@@ -1171,6 +1171,38 @@ const _WELL_KNOWN_MODELS = [
     ],
   },
   {
+    id: 'gpt-6.1-terra',
+    overrides: [
+      {
+        matchers: [
+          (provider) => provider.type === 'openai-chat-completion' && matchProvider(provider.baseUrl, 'api.openai.com'),
+        ],
+        config: { capabilities: { toolCalling: false } },
+      },
+    ],
+    name: 'GPT-6.1 Terra',
+    maxInputTokens: 1050000,
+    maxOutputTokens: 128000,
+    stream: true,
+    tokenizer: 'openai',
+    thinking: {
+      type: 'enabled',
+      effort: 'medium',
+      mode: 'standard',
+      context: 'auto',
+    },
+    capabilities: {
+      toolCalling: true,
+      imageInput: true,
+      editTools: 'apply-patch',
+    },
+    presetTemplates: [
+      openAiReasoningEffort(OPENAI_GPT_5_6_REASONING_EFFORTS, 'medium'),
+      reasoningMode(),
+      reasoningContext(),
+    ],
+  },
+  {
     id: 'gpt-6-luna',
     overrides: [
       {
